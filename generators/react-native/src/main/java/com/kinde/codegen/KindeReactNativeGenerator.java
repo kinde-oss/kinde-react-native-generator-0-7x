@@ -94,7 +94,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 			new String[] {"git_push.sh.mustache", "git_push.sh"},
 			new String[] {"README.mustache", "README.md"},
 			new String[] {"mocha.opts", "mocha.opts"}, new String[] {"travis.yml", ".travis.yml"},
-			new String[] {"babel.config.mustache", ".babel.config.js"},
+			new String[] {"babel.config.mustache", "babel.config.js"},
 			new String[] {"gitignore.mustache", ".gitignore"},
 			new String[] {"watchmanconfig", ".watchmanconfig"},
 			new String[] {"app.mustache", "app.json"},};
