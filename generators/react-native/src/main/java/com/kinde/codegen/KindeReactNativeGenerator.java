@@ -1845,9 +1845,6 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				createPath(sourceFolder, sdkFolder, "OAuth"), "AuthorizationCode.ts"));
 
 		// Enums
-		supportingFiles.add(new SupportingFile("SDK/Enums/AuthStatus.mustache",
-				createPath(sourceFolder, sdkFolder, "Enums"), "AuthStatus.enum.ts"));
-
 		supportingFiles.add(new SupportingFile("SDK/Enums/index.mustache",
 				createPath(sourceFolder, sdkFolder, "Enums"), "index.ts"));
 

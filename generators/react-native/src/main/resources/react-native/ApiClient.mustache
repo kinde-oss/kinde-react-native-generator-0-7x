@@ -1,6 +1,6 @@
 {{>licenseInfo}}
 
-import { sessionStorage } from './SDK/Storage';
+import Storage from './SDK/Storage';
 export const BASE_PATH = "{{{basePath}}}".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
@@ -103,7 +103,7 @@ export class BaseAPI {
 
     protected async request(context: RequestOpts, initOverrides?: RequestInit | InitOverrideFunction): Promise<Response> {
         const { url, init } = await this.createFetchParams(context, initOverrides);
-        const accessToken = await sessionStorage.getAccessToken();
+        const accessToken = await Storage.getAccessToken();
         const response = await this.fetchApi(url, {
             ...init,
             headers: {
