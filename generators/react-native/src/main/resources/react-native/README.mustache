@@ -16,8 +16,8 @@ For more information, please visit [{{{infoUrl}}}]({{{infoUrl}}})
 
 We support both **Expo** and **React Native** versions 0.70 and higher.
 To use this package with older versions of **React Native**, please visit
-- [react-native-sdk-0-5x *(Not support Expo)*](https://github.com/kinde-oss/react-native-sdk-0-5x)
-- [react-native-sdk](https://github.com/kinde-oss/react-native-sdk-0-6x)
+
+-   [react-native-sdk-0-5x _(Not support Expo)_](https://github.com/kinde-oss/react-native-sdk-0-5x)
 
 ## Installing dependencies
 
@@ -110,11 +110,9 @@ brew install cocoapods
 cd ios && pod install
 ```
 
-##### React Native
-
 If the `react-native-keychain` not linked, you need to install manually
 
-**With CocoaPods (High recommended)**
+**Option: With CocoaPods (High recommended)**
 
 Add the following to your `Podfile` and run pod update:
 
@@ -122,7 +120,7 @@ Add the following to your `Podfile` and run pod update:
 pod 'RNKeychain', :path => '../node_modules/react-native-keychain'
 ```
 
-**Manually**
+**Option: Manually**
 
 -   Click to `Build Phases` tab
 -   Choose `Link Binary With Libraries`
@@ -293,7 +291,7 @@ To link to your [development](https://docs.expo.dev/development/introduction/) b
 [Expo Go](https://expo.dev/expo-go) uses the `exp://` scheme, however, if we link to `exp://` without any address afterward, it will open the app to the home screen.
 
 In development, your app will live at a url like `exp://127.0.0.1:19000`. When published, an experience will be hosted at a URL like ` exp://u.expo.dev/[project-id]?channel-name=[channel-name]&runtime-version=[runtime-version]`, where `u.expo.dev/[project-id]` is the hosted URL that Expo Go fetches from.
-**Note**: You also should update your callback url to both your app and Kinde:
+_**Note**: You also should update your callback url to both your app and Kinde:_
 
 ```javascript
 KINDE_ISSUER_URL=https://your_kinde_domain.kinde.com
@@ -462,23 +460,12 @@ const handleLogout = () => {
 
 ### Get user information
 
-**\*Note warning:** Before you call the API, please make sure that you've already authenticated. If not, errors will appear there.\*
-
-To access the user information, use the `OAuthApi`, `ApiClient` classes exported from `{{{projectName}}}`, then call the `getUser` method of `OAuthApi` instance
+To access the user information, use the `getUserDetails` helper function:
 
 ```javascript
-...
-import { ..., OAuthApi, ApiClient, ... } from '{{{projectName}}}';
-...
-
-const getUserProfile = () => {
-  const config = new ApiClient.Configuration({
-    basePath: KINDE_ISSUER_URL,
-  });
-  const apiInstance = new OAuthApi(config)
-  const data = await apiInstance.getUser();
-  console.log('API called successfully. Returned data: ' + data);
-}
+const userProfile = await client.getUserDetails();
+console.log(userProfile);
+// output: {"given_name":"Dave","id":"abcdef","family_name":"Smith","email":"dave@smith.com"}
 ```
 
 ### View users in Kinde
@@ -669,10 +656,10 @@ The storage handler can be found at: [Storage class](./dist/SDK/Storage/index.d.
 
 ## How to run test
 
-The simplest way to run the JavaScript test suite is by using the following command at the root of your React Native checkout:
+The simplest way to run the test suite is by using the following command at the root of your React Native:
 
 ```bash
-npm test
+npm run test
 ```
 
 _Note: Ensure you have already run `npm install` before_
@@ -743,28 +730,3 @@ rm -rf Pods && rm Podfile.lock
 3. Clean build folders on Xcode.
 
 If you need any assistance with getting Kinde connected reach out to us at support@kinde.com.
-
-## How to run test
-
-The simplest way to run the JavaScript test suite is by using the following command at the root of your React Native checkout:
-
-```bash
-npm run test
-
-// or
-yarn test
-```
-
-## Documentation for API Endpoints
-
-All URIs are relative to *{{basePath}}*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{projectName}}.{{classname}}* | [**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{summary}}
-{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
-
-## Documentation for Models
-
-{{#models}}{{#model}} - [{{projectName}}.{{classname}}]({{modelDocPath}}{{classname}}.md)
-{{/model}}{{/models}}
