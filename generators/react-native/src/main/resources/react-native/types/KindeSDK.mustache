@@ -50,3 +50,16 @@ export type IdTokenDecoded = {
     email: string;
     picture: string;
 } & Record<string, any>;
+
+export type OptionalFlag = {
+    defaultValue?: string | boolean | number;
+};
+
+export type FeatureFlagType = 's' | 'b' | 'i';
+
+export type FeatureFlagValue = string | boolean | number;
+
+export type FeatureFlag = {
+    v?: FeatureFlagValue; // v -> value
+    t?: FeatureFlagType; // t -> type, s -> string, b -> boolean, i -> integer
+};

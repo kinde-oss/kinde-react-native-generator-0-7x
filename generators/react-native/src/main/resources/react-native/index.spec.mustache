@@ -723,7 +723,7 @@ describe('KindeSDK', () => {
             RNStorage.prototype.getItem = jest.fn().mockReturnValue({
                 password: JSON.stringify(fakeTokenResponse)
             });
-            expect(await globalClient.getClaim('iss')).toBe(
+            expect((await globalClient.getClaim('iss')).value).toBe(
                 fakePayloadFromDecodeToken.iss
             );
         });
@@ -734,7 +734,7 @@ describe('KindeSDK', () => {
             ExpoStorage.prototype.getItem = jest
                 .fn()
                 .mockReturnValue(JSON.stringify(fakeTokenResponse));
-            expect(await globalClient.getClaim('iss')).toBe(
+            expect((await globalClient.getClaim('iss')).value).toBe(
                 fakePayloadFromDecodeToken.iss
             );
         });
@@ -743,7 +743,7 @@ describe('KindeSDK', () => {
             RNStorage.prototype.getItem = jest.fn().mockReturnValue({
                 password: JSON.stringify(fakeTokenResponse)
             });
-            expect(await globalClient.getClaim('azp', 'id_token')).toBe(
+            expect((await globalClient.getClaim('azp', 'id_token')).value).toBe(
                 fakePayloadFromDecodeToken.azp
             );
         });
@@ -753,7 +753,7 @@ describe('KindeSDK', () => {
             ExpoStorage.prototype.getItem = jest
                 .fn()
                 .mockReturnValue(JSON.stringify(fakeTokenResponse));
-            expect(await globalClient.getClaim('azp', 'id_token')).toBe(
+            expect((await globalClient.getClaim('azp', 'id_token')).value).toBe(
                 fakePayloadFromDecodeToken.azp
             );
         });
