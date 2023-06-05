@@ -1,19 +1,22 @@
 {{>licenseInfo}}
 
 import jwt_decode from 'jwt-decode';
-import { Linking } from 'react-native';
 import Url from 'url-parse';
 import { UnAuthenticatedException } from '../common/exceptions/unauthenticated.exception';
 import { UnexpectedException } from '../common/exceptions/unexpected.exception';
 import {
-    OrgAdditionalParams,
     AdditionalParameters,
+    OrgAdditionalParams,
     TokenResponse
 } from '../types/KindeSDK';
 import { TokenType } from './Enums';
 import AuthorizationCode from './OAuth/AuthorizationCode';
 import Storage from './Storage';
-import { checkAdditionalParameters, checkNotNull } from './Utils';
+import {
+    checkAdditionalParameters,
+    checkNotNull,
+    openWebBrowser
+} from './Utils';
 
 {{#emitJSDoc}}/**
 * The KindeSDK module.
@@ -75,7 +78,7 @@ class KindeSDK {
      */
     async login(
         additionalParameters: Omit<OrgAdditionalParams, 'is_create_org'> = {}
-    ): Promise<void> {
+    ): Promise<TokenResponse | null> {
         checkAdditionalParameters(additionalParameters);
         await this.cleanUp();
         const auth = new AuthorizationCode();
@@ -101,7 +104,9 @@ class KindeSDK {
      * depending on the specific implementation of the registration process.
      * @returns A Promise that resolves to void.
      */
-    register(additionalParameters: OrgAdditionalParams = {}): Promise<void> {
+    register(
+        additionalParameters: OrgAdditionalParams = {}
+    ): Promise<TokenResponse | null> {
         checkAdditionalParameters(additionalParameters);
         const auth = new AuthorizationCode();
         return auth.authenticate(
@@ -131,7 +136,11 @@ class KindeSDK {
         await this.cleanUp();
         const URLParsed = Url(this.logoutEndpoint, true);
         URLParsed.query['redirect'] = this.logoutRedirectUri;
-        return Linking.openURL(URLParsed.toString());
+        const response = await openWebBrowser(
+            URLParsed.toString(),
+            this.redirectUri
+        );
+        return response.type === 'success';
     }
 
     /**

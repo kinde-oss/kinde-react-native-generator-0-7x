@@ -6,12 +6,12 @@
 * @version {{projectVersion}}
 */{{/emitJSDoc}}
 
-import { Linking } from 'react-native';
 import Url from 'url-parse';
-import { AdditionalParameters } from '../../types/KindeSDK';
+import { AdditionalParameters, TokenResponse } from '../../types/KindeSDK';
 import KindeSDK from '../KindeSDK';
 import Storage from '../Storage';
 import {
+    OpenWebInApp,
     addAdditionalParameters,
     generateChallenge,
     generateRandomString
@@ -26,18 +26,18 @@ class AuthorizationCode {
      * @param {AdditionalParameters} additionalParameters - AdditionalParameters = {}
      * @returns A promise that resolves when the URL is opened.
      */
-    authenticate(
-        kindSDK: KindeSDK,
+    async authenticate(
+        kindeSDK: KindeSDK,
         usePKCE: boolean = false,
         startPage: 'login' | 'registration' = 'login',
         additionalParameters: AdditionalParameters = {}
-    ): Promise<void> {
-        const URLParsed = Url(kindSDK.authorizationEndpoint, true);
-        URLParsed.query['client_id'] = kindSDK.clientId;
-        URLParsed.query['redirect_uri'] = kindSDK.redirectUri;
-        URLParsed.query['client_secret'] = kindSDK.clientSecret;
+    ): Promise<TokenResponse | null> {
+        const URLParsed = Url(kindeSDK.authorizationEndpoint, true);
+        URLParsed.query['client_id'] = kindeSDK.clientId;
+        URLParsed.query['redirect_uri'] = kindeSDK.redirectUri;
+        URLParsed.query['client_secret'] = kindeSDK.clientSecret;
         URLParsed.query['grant_type'] = 'authorization_code';
-        URLParsed.query['scope'] = kindSDK.scope;
+        URLParsed.query['scope'] = kindeSDK.scope;
         URLParsed.query['start_page'] = startPage;
         URLParsed.query['response_type'] = 'code';
 
@@ -51,7 +51,7 @@ class AuthorizationCode {
             URLParsed.query['code_challenge_method'] = 'S256';
             Storage.setCodeVerifier(challenge.codeVerifier);
         }
-        return Linking.openURL(URLParsed.toString());
+        return OpenWebInApp(URLParsed.toString(), kindeSDK);
     }
 }
 
