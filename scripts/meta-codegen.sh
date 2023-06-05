@@ -34,7 +34,5 @@ export JAVA_OPTS="${JAVA_OPTS} -Xmx1024M -DloggerPath=conf/log4j.properties"
 
 ags2="generate -t $TEMAPLTE $@"
 ags3="--additional-properties=usePromises=true"
-ags4="--global-property apis=''"
-ags5="--global-property models=''"
 
 java $JAVA_OPTS -cp ${root}/generators/${OUT_GENERATOR}/target/${GENERATOR_NAME}-openapi-generator-1.0.0.jar:$EXECUTABLE org.openapitools.codegen.OpenAPIGenerator $ags2 $ags3
