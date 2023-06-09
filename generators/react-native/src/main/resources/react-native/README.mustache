@@ -335,6 +335,8 @@ const handleSignIn = async () => {
 
 ### ~~Handle redirect~~ [Deprecated]
 
+**_Note_: Since version 1.1, handling redirection is no longer necessary because the SDK authenticates by starting a web browser inside your app rather than using an external one. Details regarding implementations can be found at: [Full code sample for the authentication](#full-code-sample-for-the-authentication)**
+
 After the user logs in to Kinde, it will be redirected to your app via a deep link, which includes some information (e.g., code) as parameters, and then you need to call the `getToken` method to receive a token from Kinde. The SDK will store the token on the keychain. Now, the user will be authenticated without logging in again.
 
 ##### ~~Handle redirect with React Native~~
@@ -445,6 +447,40 @@ const handleLogout = async () => {
     const loggedOut = client.logout();
     if (loggedOut) {
         // User was logged out
+    }
+};
+```
+
+### Full code sample for the authentication
+
+```javascript
+const checkAuthenticate = async () => {
+    // Using `isAuthenticated` to check if the user is authenticated or not
+    if (await client.isAuthenticated) {
+        // Need to implement, e.g: call an api, etc...
+    } else {
+        // Need to implement, e.g: redirect user to sign in, etc..
+    }
+};
+useEffect(() => {
+    checkAuthenticate();
+}, []);
+const handleSignIn = async () => {
+    const token = await client.login();
+    if (token) {
+        // Need to implement, e.g: call an api, etc...
+    }
+};
+const handleSignUp = async () => {
+    const token = await client.register();
+    if (token) {
+        // Need to implement, e.g: call an api, etc...
+    }
+};
+const handleLogout = async () => {
+    const isLoggedOut = await client.logout();
+    if (isLoggedOut) {
+        // Need to implement, e.g: redirect user to login screen, etc...
     }
 };
 ```
