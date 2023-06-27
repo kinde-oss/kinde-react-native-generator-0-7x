@@ -41,4 +41,9 @@ echo "Cleaning output folder..."
 
 echo "Building package... $CONFIG"
 (cd "$root" && ./scripts/meta-codegen.sh -g "kinde-$LANGUAGE" -o $OUTPUT -c $CONFIG)
+
+echo "Cleaning..."
+
+rm -rf "$OUTPUT/docs" && rm -rf "$OUTPUT/src/apis" && rm -rf "$OUTPUT/src/models"
+
 echo "Package generated at : $OUTPUT"
