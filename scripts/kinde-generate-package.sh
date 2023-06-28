@@ -45,4 +45,5 @@ echo "Building package... $CONFIG"
 echo "Cleaning..."
 
 rm -rf "$OUTPUT/docs" && rm -rf "$OUTPUT/src/apis" && rm -rf "$OUTPUT/src/models"
+
 echo "Package generated at : $OUTPUT"
