@@ -55,7 +55,8 @@ servers:
 ```
 
 ## How to update the API Specs ?
-You can update the content of `kinde-mgmt-api-specs.yaml` . Then regenerate the SDK you want.
+We're using `https://kinde.com/api/kinde-mgmt-api-specs.yaml` as the configuration file. Check the details at `bin/configs/kinde-react-native.yaml`. You can clone the new inspec file based on it, update the `inputSpec`, then regenerate the SDK you want.
+Also, you can change the package version by updating `projectVersion`
 ## Notes:
  ### React Native
  - React Native SDK Template: files under `generators/react-native`
