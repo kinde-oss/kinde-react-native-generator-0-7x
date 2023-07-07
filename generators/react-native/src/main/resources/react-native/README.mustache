@@ -462,6 +462,17 @@ const handleLogout = async () => {
 };
 ```
 
+We have also implemented an API for token revocation. Simply pass `true` as an argument in the `logout` function. This flag will assist in revoking the token without having to open the website within your apps.
+
+```javascript
+const handleLogout = async () => {
+    const loggedOut = client.logout(true);
+    if (loggedOut) {
+        // User was logged out
+    }
+};
+```
+
 ### Full code sample for the authentication
 
 ```javascript
@@ -473,23 +484,36 @@ const checkAuthenticate = async () => {
         // Need to implement, e.g: redirect user to sign in, etc..
     }
 };
+
 useEffect(() => {
     checkAuthenticate();
 }, []);
+
 const handleSignIn = async () => {
     const token = await client.login();
     if (token) {
         // Need to implement, e.g: call an api, etc...
     }
 };
+
 const handleSignUp = async () => {
     const token = await client.register();
     if (token) {
         // Need to implement, e.g: call an api, etc...
     }
 };
+
 const handleLogout = async () => {
+    // With open web in your apps
     const isLoggedOut = await client.logout();
+
+    if (isLoggedOut) {
+        // Need to implement, e.g: redirect user to login screen, etc...
+    }
+
+    // Without open web in your apps
+    const isLoggedOut = await client.logout(true);
+
     if (isLoggedOut) {
         // Need to implement, e.g: redirect user to login screen, etc...
     }
@@ -720,7 +744,7 @@ _Note: Ensure you have already run `npm install` before_
 | -------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | login | Constructs redirect url and sends user to Kinde to sign in | {<br>org_code?: string<br>} | await kinde.login(); or<br>await kinde.login({org_code: 'your organization code'}) // Allow org_code to be provided if a specific org is to be signed up into. | {<br>"access_token": "eyJhbGciOiJSUzI...",<br>"expires_in": 86400,<br>"id_token": "eyJhbGciOiJSU...",<br>"refresh_token": "yXI1bFQKbXKLD7AIU...",<br>"scope": "openid profile email offline",<br>"token_type": "bearer"<br>} |
 | register | Constructs redirect url and sends user to Kinde to sign up | {<br>org_code?: string<br>} | await kinde.register(); or<br>await kinde.register({org_code: 'your organization code'}) // Allow org_code to be provided if a specific org is to be registered into. | {<br>"access_token": "eyJhbGciOiJSUzI...",<br>"expires_in": 86400,<br>"id_token": "eyJhbGciOiJSU...",<br>"refresh_token": "yXI1bFQKbXKLD7AIU...",<br>"scope": "openid profile email offline",<br>"token_type": "bearer"<br>} |
-| logout | Logs the user out of Kinde | | await kinde.logout(); | true or false |
+| logout | Logs the user out of Kinde | isRevoke: boolean // default is false | await kinde.logout(); or <br> await kinde.logout(true); | true or false |
 | getToken | Returns the raw Access token from URL after logged from Kinde | url?: string | kinde.getToken(url); or<br>kinde.getToken(); // In this case, you have already authenticated before. Otherwise, an error will be thrown in here | {<br>"access_token": "eyJhbGciOiJSUzI...",<br>"expires_in": 86400,<br>"id_token": "eyJhbGciOiJSU...",<br>"refresh_token": "yXI1bFQKbXKLD7AIU...",<br>"scope": "openid profile email offline",<br>"token_type": "bearer"<br>} |
 | createOrg | Constructs redirect url and sends user to Kinde to sign up and create a new org for your business | {<br>org_name?: string<br>} | await kinde.createOrg(); or<br>await kinde.createOrg({org_name: 'your organization name'}); // Allow org_name to be provided if you want a specific organization name when you create | {<br>"access_token": "eyJhbGciOiJSUzI...",<br>"expires_in": 86400,<br>"id_token": "eyJhbGciOiJSU...",<br>"refresh_token": "yXI1bFQKbXKLD7AIU...",<br>"scope": "openid profile email offline",<br>"token_type": "bearer"<br>} |
 | getClaim | Gets a claim from an access or id token | claim: string;<br>tokenKey?: string | await kinde.getClaim('given_name', 'id_token'); | "David" |
