@@ -39,8 +39,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	public static final String PREFIX_PARAMETER_INTERFACES = "prefixParameterInterfaces";
 	public static final String WITHOUT_RUNTIME_CHECKS = "withoutRuntimeChecks";
 	public static final String STRING_ENUMS = "stringEnums";
-	public static final String STRING_ENUMS_DESC =
-			"Generate string enums instead of objects for enum values.";
+	public static final String STRING_ENUMS_DESC = "Generate string enums instead of objects for enum values.";
 	public static final String EMIT_MODEL_METHODS = "emitModelMethods";
 	public static final String EMIT_JS_DOC = "emitJSDoc";
 	public static final String USE_PROMISES = "usePromises";
@@ -61,11 +60,9 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 
 	// "Saga and Record" mode.
 	public static final String SAGAS_AND_RECORDS = "sagasAndRecords";
-	public static final String DETECT_PASSTHROUGH_MODELS_WITH_SUFFIX_AND_FIELD =
-			"detectPassthroughModelsWithSuffixAndField";
+	public static final String DETECT_PASSTHROUGH_MODELS_WITH_SUFFIX_AND_FIELD = "detectPassthroughModelsWithSuffixAndField";
 	public static final String INFER_UNIQUE_ID_FROM_NAME_SUFFIX = "inferUniqueIdFromNameSuffix";
-	public static final String INFER_ENTITY_FROM_UNIQUE_ID_WITH_NAME =
-			"inferEntityFromUniqueIdWithName";
+	public static final String INFER_ENTITY_FROM_UNIQUE_ID_WITH_NAME = "inferEntityFromUniqueIdWithName";
 	public static final String PACKAGE_AS_SOURCE_ONLY_LIBRARY = "packageAsSourceOnlyLibrary";
 
 	private static final String X_IS_UNIQUE_ID = "x-isUniqueId";
@@ -90,14 +87,14 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	protected String modelDocPath = "docs/";
 
 	final String[][] JAVASCRIPT_ES6_SUPPORTING_FILES = {
-			new String[] {"package.mustache", "package.json"},
-			new String[] {"git_push.sh.mustache", "git_push.sh"},
-			new String[] {"README.mustache", "README.md"},
-			new String[] {"mocha.opts", "mocha.opts"}, new String[] {"travis.yml", ".travis.yml"},
-			new String[] {"babel.config.mustache", "babel.config.js"},
-			new String[] {"gitignore.mustache", ".gitignore"},
-			new String[] {"watchmanconfig", ".watchmanconfig"},
-			new String[] {"app.mustache", "app.json"},};
+			new String[] { "package.mustache", "package.json" },
+			new String[] { "git_push.sh.mustache", "git_push.sh" },
+			new String[] { "README.mustache", "README.md" },
+			new String[] { "mocha.opts", "mocha.opts" }, new String[] { "travis.yml", ".travis.yml" },
+			new String[] { "babel.config.mustache", "babel.config.js" },
+			new String[] { "gitignore.mustache", ".gitignore" },
+			new String[] { "watchmanconfig", ".watchmanconfig" },
+			new String[] { "app.mustache", "app.json" }, };
 
 	public KindeReactNativeGenerator() {
 		super();
@@ -143,7 +140,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				SchemaTypeUtil.BOOLEAN_TYPE).defaultValue(Boolean.FALSE.toString()));
 		this.cliOptions.add(new CliOption(CodegenConstants.USE_SINGLE_REQUEST_PARAMETER,
 				CodegenConstants.USE_SINGLE_REQUEST_PARAMETER_DESC, SchemaTypeUtil.BOOLEAN_TYPE)
-						.defaultValue(Boolean.TRUE.toString()));
+				.defaultValue(Boolean.TRUE.toString()));
 		this.cliOptions.add(new CliOption(PREFIX_PARAMETER_INTERFACES,
 				"Setting this property to true will generate parameter interface declarations prefixed with API class name to avoid name conflicts.",
 				SchemaTypeUtil.BOOLEAN_TYPE).defaultValue(Boolean.FALSE.toString()));
@@ -156,9 +153,9 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 		this.cliOptions
 				.add(new CliOption(STRING_ENUMS, STRING_ENUMS_DESC, SchemaTypeUtil.BOOLEAN_TYPE)
 						.defaultValue(Boolean.FALSE.toString()));
-						this.cliOptions.add(new CliOption(EMIT_MODEL_METHODS,
+		this.cliOptions.add(new CliOption(EMIT_MODEL_METHODS,
 				"generate getters and setters for model properties")
-						.defaultValue(Boolean.FALSE.toString()));
+				.defaultValue(Boolean.FALSE.toString()));
 		this.cliOptions.add(new CliOption(EMIT_JS_DOC, "generate JSDoc comments")
 				.defaultValue(Boolean.TRUE.toString()));
 	}
@@ -413,15 +410,16 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 			supportingFiles.add(
 					new SupportingFile(supportingTemplateFile[0], "", supportingTemplateFile[1]));
 		}
-		
+
 		// License
 		supportingFiles.add(new SupportingFile("LICENSE", createPath(""),
 				"LICENSE"));
-		
 
 		// Assess
 		supportingFiles.add(new SupportingFile("assets/image.png",
 				createPath(""), "assets/image.png"));
+		supportingFiles.add(new SupportingFile("assets/build-issue.png",
+				createPath(""), "assets/build-issue.png"));
 
 		addSupportingFilesForSDK();
 		addSupportingFilesForIOS();
@@ -430,7 +428,6 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 		addSupportingFilesForExtending();
 		addSupportingFilesForCommon();
 	}
-
 
 	@Override
 	public void preprocessOpenAPI(OpenAPI openAPI) {
@@ -491,7 +488,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 		additionalProperties.put(EMIT_MODEL_METHODS, emitModelMethods);
 		additionalProperties.put(EMIT_JS_DOC, emitJSDoc);
 		apiDocTemplateFiles.put("api_doc.mustache", ".md");
-        modelDocTemplateFiles.put("model_doc.mustache", ".md");
+		modelDocTemplateFiles.put("model_doc.mustache", ".md");
 	}
 
 	public void setProjectName(String projectName) {
@@ -522,10 +519,13 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	/**
 	 * Concatenates an array of path segments into a path string.
 	 *
-	 * @param segments The path segments to concatenate. A segment may contain either of the file
-	 *        separator characters '\' or '/'. A segment is ignored if it is <code>null</code>,
-	 *        empty or &quot;.&quot;.
-	 * @return A path string using the correct platform-specific file separator character.
+	 * @param segments The path segments to concatenate. A segment may contain
+	 *                 either of the file
+	 *                 separator characters '\' or '/'. A segment is ignored if it
+	 *                 is <code>null</code>,
+	 *                 empty or &quot;.&quot;.
+	 * @return A path string using the correct platform-specific file separator
+	 *         character.
 	 */
 	private String createPath(String... segments) {
 		StringBuilder buf = new StringBuilder();
@@ -559,7 +559,6 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 		}
 		return super.getEnumDefaultValue(defaultValue, dataType);
 	}
-
 
 	@Override
 	protected ImmutableMap.Builder<String, Mustache.Lambda> addMustacheLambdas() {
@@ -688,7 +687,8 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 		supportingFiles.add(new SupportingFile("README.mustache", "", "README.md"));
 		supportingFiles.add(new SupportingFile("package.mustache", "", "package.json"));
 		supportingFiles.add(new SupportingFile("tsconfig.mustache", "", "tsconfig.json"));
-		// in case ECMAScript 6 is supported add another tsconfig for an ESM (ECMAScript Module)
+		// in case ECMAScript 6 is supported add another tsconfig for an ESM (ECMAScript
+		// Module)
 		if (supportsES6) {
 			supportingFiles
 					.add(new SupportingFile("tsconfig.esm.mustache", "", "tsconfig.esm.json"));
@@ -759,8 +759,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				if (schema != null) {
 					cm = fromModel(op.returnBaseType, schema);
 
-					Object returnPassthrough =
-							cm.vendorExtensions.get(X_OPERATION_RETURN_PASSTHROUGH);
+					Object returnPassthrough = cm.vendorExtensions.get(X_OPERATION_RETURN_PASSTHROUGH);
 					if (returnPassthrough instanceof String) {
 						if (((String) returnPassthrough).isEmpty()) {
 							op.hasReturnPassthroughVoid = true;
@@ -965,8 +964,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				ExtendedCodegenProperty var = (ExtendedCodegenProperty) cpVar;
 
 				if (Boolean.TRUE.equals(var.isEnum)) {
-					var.datatypeWithEnum =
-							var.datatypeWithEnum.replace(var.enumName, cm.classname + var.enumName);
+					var.datatypeWithEnum = var.datatypeWithEnum.replace(var.enumName, cm.classname + var.enumName);
 				}
 			}
 		}
@@ -987,11 +985,12 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 			Object xEntityId) {
 		// name enum with model name, e.g. StatusEnum => PetStatusEnum
 		if (Boolean.TRUE.equals(var.isEnum)) {
-			// behaviour for enum names is specific for Typescript Fetch, not using namespaces
-			var.datatypeWithEnum =
-					var.datatypeWithEnum.replace(var.enumName, parentClassName + var.enumName);
+			// behaviour for enum names is specific for Typescript Fetch, not using
+			// namespaces
+			var.datatypeWithEnum = var.datatypeWithEnum.replace(var.enumName, parentClassName + var.enumName);
 
-			// need to post-process defaultValue, was computed with previous var.datatypeWithEnum
+			// need to post-process defaultValue, was computed with previous
+			// var.datatypeWithEnum
 			if (var.defaultValue != null && !var.defaultValue.equals("undefined")) {
 				int dotPos = var.defaultValue.indexOf(".");
 				if (dotPos != -1) {
@@ -1020,16 +1019,13 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				String newItemsDataType = var.getItemsDataType();
 				if (var.items.isModel) {
 					newItemsDataType = var.items.dataType + "Record";
-					var.dataTypeAlternate =
-							var.dataTypeAlternate.replace(var.items.dataType, newItemsDataType);
+					var.dataTypeAlternate = var.dataTypeAlternate.replace(var.items.dataType, newItemsDataType);
 				} else if (var.items.isEnum) {
 					newItemsDataType = var.items.datatypeWithEnum;
-					var.dataTypeAlternate =
-							var.dataTypeAlternate.replace(var.items.dataType, newItemsDataType);
+					var.dataTypeAlternate = var.dataTypeAlternate.replace(var.items.dataType, newItemsDataType);
 				} else if (var.isUniqueId) {
 					newItemsDataType = "string";
-					var.dataTypeAlternate =
-							var.dataTypeAlternate.replace("number", newItemsDataType);
+					var.dataTypeAlternate = var.dataTypeAlternate.replace("number", newItemsDataType);
 				}
 
 				if (var.itemsAreNullable()) {
@@ -1134,14 +1130,12 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				ExtendedCodegenParameter param = (ExtendedCodegenParameter) cpParam;
 
 				if (param.vendorExtensions.get(X_IS_UNIQUE_ID) instanceof Boolean) {
-					param.isUniqueId =
-							Boolean.TRUE.equals(param.vendorExtensions.get(X_IS_UNIQUE_ID));
+					param.isUniqueId = Boolean.TRUE.equals(param.vendorExtensions.get(X_IS_UNIQUE_ID));
 				} else if (this.getInferUniqueIdFromNameSuffix()
 						&& (param.isArray && "number".equals(param.items.dataType))
 						|| ("number".equals(param.dataType))) {
 					param.isUniqueId = this.isUniqueIdAccordingToNameSuffix(param.paramName);
 				}
-
 
 				param.dataTypeAlternate = param.dataType;
 				if (param.isArray) {
@@ -1159,8 +1153,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 						param.dataTypeAlternate = param.datatypeWithEnum.replace("Array<", "List<");
 					} else if (param.isUniqueId) {
 						newItemsDataType = "string";
-						param.dataTypeAlternate =
-								param.dataTypeAlternate.replace("number", newItemsDataType);
+						param.dataTypeAlternate = param.dataTypeAlternate.replace("number", newItemsDataType);
 					}
 
 					if (param.itemsAreNullable()) {
@@ -1230,7 +1223,8 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	}
 
 	private void addExtraReservedWordsForSagasAndRecords() {
-		// immutablejs Records have potentially many reserved words. Adding only strict minimum for
+		// immutablejs Records have potentially many reserved words. Adding only strict
+		// minimum for
 		// now.
 		this.reservedWords.add("entries");
 	}
@@ -1254,7 +1248,8 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	private static boolean itemsAreUniqueId(CodegenProperty items) {
 		if (items.items != null) {
 			return itemsAreUniqueId(items.items);
-		} ;
+		}
+		;
 		if (items.vendorExtensions.get(X_IS_UNIQUE_ID) instanceof Boolean) {
 			return Boolean.TRUE.equals(items.vendorExtensions.get(X_IS_UNIQUE_ID));
 		}
@@ -1264,14 +1259,16 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	private static boolean itemsAreNullable(CodegenProperty items) {
 		if (items.items != null) {
 			return itemsAreNullable(items.items);
-		} ;
+		}
+		;
 		return items.isNullable;
 	}
 
 	private static String getItemsDataType(CodegenProperty items) {
 		if (items.items != null) {
 			return getItemsDataType(items.items);
-		} ;
+		}
+		;
 		return items.dataType;
 	}
 
@@ -1948,12 +1945,16 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 
 	private void addSupportingFilesForCommon() {
 		supportingFiles
-				.add(new SupportingFile("common/exceptions/property-required.mustache", createPath("/src/common/exceptions"), "property-required.exception.ts"));
+				.add(new SupportingFile("common/exceptions/property-required.mustache",
+						createPath("/src/common/exceptions"), "property-required.exception.ts"));
 		supportingFiles
-				.add(new SupportingFile("common/exceptions/unauthenticated.mustache", createPath("/src/common/exceptions"), "unauthenticated.exception.ts"));
+				.add(new SupportingFile("common/exceptions/unauthenticated.mustache",
+						createPath("/src/common/exceptions"), "unauthenticated.exception.ts"));
 		supportingFiles
-				.add(new SupportingFile("common/exceptions/invalid-type.mustache", createPath("/src/common/exceptions"), "invalid-type.exception.ts"));
+				.add(new SupportingFile("common/exceptions/invalid-type.mustache", createPath("/src/common/exceptions"),
+						"invalid-type.exception.ts"));
 		supportingFiles
-				.add(new SupportingFile("common/exceptions/unexpected.mustache", createPath("/src/common/exceptions"), "unexpected.exception.ts"));
+				.add(new SupportingFile("common/exceptions/unexpected.mustache", createPath("/src/common/exceptions"),
+						"unexpected.exception.ts"));
 	}
 }
