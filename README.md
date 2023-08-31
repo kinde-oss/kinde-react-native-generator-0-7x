@@ -33,31 +33,19 @@ $ make clean
 ```
 
 To build a SDKs:
-
-The format will be `build-{language}`. Example, build `react-native`:
 ```
 $ make build-react-native
 ```
-Now we have only react-native SDK
-
-Check `Makefile` for more detail.
-
-**Note: Please change your business name in `kinde-mgmt-api-specs.yaml` before generating the SDK**
-```
-...
-servers:
-  - url: https://{businessName}.kinde.com
-    variables:
-      businessName:
-        description: Business Name created in the Kinde Console
-        default: YOUR_BUSINESS_NAME // <-- Change here
-...
-```
-
-## How to update the API Specs ?
-We're using `https://kinde.com/api/kinde-mgmt-api-specs.yaml` as the configuration file. Check the details at `bin/configs/kinde-react-native.yaml`. You can clone the new inspec file based on it, update the `inputSpec`, then regenerate the SDK you want.
-Also, you can change the package version by updating `projectVersion`
+The SDK is located `/out/kinde-react-native-sdk`
 ## Notes:
+### Change the version of the SDK generator
+To modify the package version, you can update the `projectVersion` variable
+```yaml
+// bin/configs/kinde-react-native.yaml
+inputSpec: https://kinde.com/api/kinde-mgmt-api-specs.yaml
+packageName: kinde/oauth2
+projectVersion: 1.1.5 // <-- Change this
+```
  ### React Native
  - React Native SDK Template: files under `generators/react-native`
  - Mustache files in React Native template: `/generators/react-native/src/main/resources/react-native`
