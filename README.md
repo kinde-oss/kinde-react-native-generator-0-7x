@@ -1,63 +1,85 @@
-<!-- GETTING STARTED -->
-## Getting Started
+# Kinde React Native 0.7x generator
 
-This project inherited from the [OpenAPI generator](https://github.com/OpenAPITools/openapi-generator) to create this project
+The generator for the [Kinde React Native 0.7x SDK](https://github.com/kinde-oss/kinde-react-native-sdk-0-7x).
 
-## Project Structure
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Kinde Docs](https://img.shields.io/badge/Kinde-Docs-eee?style=flat-square)](https://kinde.com/docs/developer-tools) [![Kinde Community](https://img.shields.io/badge/Kinde-Community-eee?style=flat-square)](https://thekindecommunity.slack.com)
 
-We added new files & folders:
+## Overview
 
-```
-├── bin
-│   └── configs
-│       └── kinde-react-native.yaml // This file using custom config when generate
-├── generators  // This folder contains our packages generated
-│   └── react-native // This is a package generated
-├── out // This folder contains our final SDK after build
-│   └── kinde-react-native-sdk  // This is a finished package
-├── scripts // This folder contains our's script to build package
-│   └── generator.sh // This script help create a new generator
-│   └── kinde-generate-package.sh // This script help build package by input language. Default: `react-native`
-│   └── meta-codegen.sh // This script help build package
-├── kinde-mgmt-api-specs.yaml // This file is the OpenAPI spec which can be changed for updating new API
-├── OPENAPI_README.md // This file is the original OpenAPI README
-├── Makefile // This file defines a set of tasks to be executed
-├── others... // Others files and folders of the OpenAPI Generator
-```
+This generator creates an SDK in React Native 0.7x that can authenticate to Kinde using the Authorization Code grant or the Authorization Code with PKCE grant via the [OAuth 2.0 protocol](https://oauth.net/2/) 
 
-## Commands:
+Also, see the SDKs section in Kinde’s [contributing guidelines](https://github.com/kinde-oss/.github/blob/main/.github/CONTRIBUTING.md).
 
-To clean generated SDKs
-```
-$ make clean
-```
+## Usage
 
-To build a SDKs:
+### Requirements
 
-The format will be `build-{language}`. Example, build `react-native`:
-```
-$ make build-react-native
-```
-Now we have only react-native SDK
+- Java [Link to download](https://www.java.com/en/)
 
-Check `Makefile` for more detail.
+### Initial set up
 
-**Note: Please change your business name in `kinde-mgmt-api-specs.yaml` before generating the SDK**
-```
-...
-servers:
-  - url: https://{businessName}.kinde.com
-    variables:
-      businessName:
-        description: Business Name created in the Kinde Console
-        default: YOUR_BUSINESS_NAME // <-- Change here
-...
+1. Clone the repository to your machine:
+
+   ```bash
+   git clone https://github.com/kinde-oss/kinde-react-native-generator-0-7x
+   ```
+
+2. Go into the project:
+
+   ```bash
+   cd kinde-react-native-generator-0-7x
+   ```
+
+### SDK generation
+
+Run the following command to generate the SDK:
+
+```bash
+make clean
+make build-react-native
 ```
 
-## How to update the API Specs ?
-We're using `https://kinde.com/api/kinde-mgmt-api-specs.yaml` as the configuration file. Check the details at `bin/configs/kinde-react-native.yaml`. You can clone the new inspec file based on it, update the `inputSpec`, then regenerate the SDK you want.
-Also, you can change the package version by updating `projectVersion`
-## Notes:
- ### React Native
- - React Native SDK Template: files under `generators/react-native`
- - Mustache files in React Native template: `/generators/react-native/src/main/resources/react-native`
+The SDK gets outputted to: `./out/kinde-react-native-sdk`, which you can enter via:
+
+```bash
+cd out/kinde-react-native-sdk
+```
+
+## SDK documentation
+
+[React Native 0.7x SDK](https://kinde.com/docs/developer-tools/react-native-sdk/)
+
+## Development
+#### Add the SDK to your existing project
+- To add the SDK in an already existing project, you must first compile the SDK package:
+  ```bash
+  git init && npm install
+  npm run build
+  ```
+- Next, go to the project's root directory:
+  ```bash
+  npm pack <path-to-generator-folder>/out/kinde-react-native-sdk
+  ```
+- Update the `package.json` file
+  ```json
+  {
+    ...
+    "dependencies": {
+      "@kinde-oss/react-native-sdk-0-7x": "file:kinde-oss-react-native-sdk-0-7x-<version>.tgz",
+      ...
+    }
+    ...
+  }
+  ```
+#### Regenerate the SDK
+When you modify the SDK, it is essential to update the template files to regenerate the SDK:
+- Mustache files: `/generators/react-native/src/main/resources/react-native`
+- Generator file: `generators/react-native/src/main/java/com/kinde/codegen/KindeReactNativeGenerator.java`
+
+## Contributing
+
+Please refer to Kinde’s [contributing guidelines](https://github.com/kinde-oss/.github/blob/489e2ca9c3307c2b2e098a885e22f2239116394a/CONTRIBUTING.md).
+
+## License
+
+By contributing to Kinde, you agree that your contributions will be licensed under its MIT License.
