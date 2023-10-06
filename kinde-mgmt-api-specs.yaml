@@ -13,7 +13,7 @@ servers:
     variables:
       businessName:
         description: Business Name created in the Kinde Console
-        default: your_kinde_domain
+        default: true
 security:
   - kindeBearerAuth: []
 tags:
