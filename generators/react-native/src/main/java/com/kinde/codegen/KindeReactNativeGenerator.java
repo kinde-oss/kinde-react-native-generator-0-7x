@@ -44,7 +44,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	public static final String EMIT_JS_DOC = "emitJSDoc";
 	public static final String USE_PROMISES = "usePromises";
 
-	protected String projectName = "@kinde-oss/react-native-sdk-0-7x";
+	protected String projectName = "@kinde-oss/react-native-sdk-0-7";
 	protected String moduleName;
 	protected String projectDescription = "Kinde React Native SDK for authentication";
 	protected String projectVersion;
@@ -1408,7 +1408,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	class ExtendedCodegenProperty extends CodegenProperty {
 		public String dataTypeAlternate;
 		public boolean isEntity; // Is a model containing an "id" property marked as isUniqueId and
-									// which matches the 'x-entityId' value.
+		// which matches the 'x-entityId' value.
 		public boolean isUniqueId; // The property represents a unique id (x-isUniqueId: true)
 		public boolean keepAsJSObject;
 		public boolean isReservedRecordField;
@@ -1475,9 +1475,9 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 			this.isFile = cp.isFile;
 			this.isBoolean = cp.isBoolean;
 			this.isDate = cp.isDate; // full-date notation as defined by RFC 3339, section 5.6, for
-										// example, 2017-07-21
+			// example, 2017-07-21
 			this.isDateTime = cp.isDateTime; // the date-time notation as defined by RFC 3339,
-												// section 5.6, for example, 2017-07-21T17:32:28Z
+			// section 5.6, for example, 2017-07-21T17:32:28Z
 			this.isUuid = cp.isUuid;
 			this.isUri = cp.isUri;
 			this.isEmail = cp.isEmail;
@@ -1820,6 +1820,8 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 				createPath(sourceFolder, "types"), "global.d.ts"));
 		supportingFiles.add(new SupportingFile("types/KindeSDK.mustache",
 				createPath(sourceFolder, "types"), "KindeSDK.ts"));
+		supportingFiles.add(new SupportingFile("types/Auth.mustache",
+				createPath(sourceFolder, "types"), "Auth.ts"));
 
 		// Storage
 		supportingFiles.add(new SupportingFile("SDK/Storage/base.mustache",

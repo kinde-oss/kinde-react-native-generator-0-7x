@@ -128,10 +128,10 @@ jest.mock(process.cwd() + '/src/SDK/Utils', () => ({
         }
     }),
     openWebBrowser: jest.fn(async (url: string, redirectUri: string) => {
-        const isExpoGo =
+        const isExpo =
             Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
-        if (isExpoGo) {
+        if (isExpo) {
             return openAuthSessionAsync(url, redirectUri);
         }
 
@@ -158,7 +158,7 @@ jest.mock(process.cwd() + '/src/SDK/Utils', () => ({
         return formData;
     }),
 
-    get isExpoGo() {
+    get isExpo() {
         return (
             Constants.executionEnvironment === ExecutionEnvironment.StoreClient
         );
@@ -748,7 +748,7 @@ describe('KindeSDK', () => {
             RNStorage.prototype.getItem = jest.fn().mockReturnValue({
                 password: JSON.stringify(fakeTokenResponse)
             });
-            expect(await globalClient.getClaim('iss')).toBe(
+            expect((await globalClient.getClaim('iss')).value).toBe(
                 fakePayloadFromDecodeToken.iss
             );
         });
@@ -759,7 +759,7 @@ describe('KindeSDK', () => {
             ExpoStorage.prototype.getItem = jest
                 .fn()
                 .mockReturnValue(JSON.stringify(fakeTokenResponse));
-            expect(await globalClient.getClaim('iss')).toBe(
+            expect((await globalClient.getClaim('iss')).value).toBe(
                 fakePayloadFromDecodeToken.iss
             );
         });
@@ -768,7 +768,7 @@ describe('KindeSDK', () => {
             RNStorage.prototype.getItem = jest.fn().mockReturnValue({
                 password: JSON.stringify(fakeTokenResponse)
             });
-            expect(await globalClient.getClaim('azp', 'id_token')).toBe(
+            expect((await globalClient.getClaim('azp', 'id_token')).value).toBe(
                 fakePayloadFromDecodeToken.azp
             );
         });
@@ -778,7 +778,7 @@ describe('KindeSDK', () => {
             ExpoStorage.prototype.getItem = jest
                 .fn()
                 .mockReturnValue(JSON.stringify(fakeTokenResponse));
-            expect(await globalClient.getClaim('azp', 'id_token')).toBe(
+            expect((await globalClient.getClaim('azp', 'id_token')).value).toBe(
                 fakePayloadFromDecodeToken.azp
             );
         });
