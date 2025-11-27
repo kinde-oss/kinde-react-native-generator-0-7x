@@ -1,6 +1,5 @@
 .mvn/.gradle-enterprise/
 .scannerwork/
-.vscode
 *.iml
 out/
 *.ipr
@@ -28,7 +27,6 @@ packages/
 .pub
 .packages
 .vagrant/
-.vscode/
 **/.vs
 .factorypath
 .metals/*
@@ -81,3 +79,7 @@ out/
 
 # Sample folders
 samples
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
