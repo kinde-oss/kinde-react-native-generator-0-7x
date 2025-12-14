@@ -44,7 +44,7 @@ public class KindeReactNativeGenerator extends AbstractTypeScriptClientCodegen {
 	public static final String EMIT_JS_DOC = "emitJSDoc";
 	public static final String USE_PROMISES = "usePromises";
 
-	protected String projectName = "@kinde-oss/react-native-sdk-0-7";
+	protected String projectName = "@kinde-oss/react-native-sdk-0-7x";
 	protected String moduleName;
 	protected String projectDescription = "Kinde React Native SDK for authentication";
 	protected String projectVersion;
